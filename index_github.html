@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadavre Exquis 4 slices</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .exquisite-container {
+      width: 400px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    .slice {
+      height: 140px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slice img {
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
+
+    .slice:nth-child(1) img {
+      top: 0;
+    }
+
+    .slice:nth-child(2) img {
+      top: -140px;
+    }
+
+    .slice:nth-child(3) img {
+      top: -280px;
+    }
+
+    .slice:nth-child(4) img {
+      top: -420px;
+    }
+  </style>
+</head>
+<body>
+  <div class="exquisite-container" id="container"></div>
+
+  <script>
+    const imageList = [
+      "199678_Ne╠ücessaire_(one_of_a_pair).jpg",
+      "396931_The_Virgin_and_Child_at_a_table_with_the_young_Joh.jpg",
+      "310701_Mantle_Fragment.jpg",
+      "396396_Covered_Cup_with_Children_on_the_Base.jpg",
+      "243965_Alabaster_jug.jpg",
+      "349259_Our_Watering_Places_ΓÇô_The_Empty_Sleeve_at_Newport_.jpg",
+      "67536_Piece.jpg",
+      "268106_Washington._Harewood_Hospital.jpg",
+      "318113_Coca_Bag_(Ch'uspa).jpg",
+      "170256_Gloves.jpg",
+      "190166_Pair_of_vase_ornaments.jpg",
+      "68211_Textile_Sample_from_Sample_Book.jpg",
+      "232268_Naval_Reward_Medal_of_Elizabeth_I.jpg",
+      "361572_Diodati._Pious_Annotations.jpg",
+      "386571_Interior_Design_for_a_Gray_Curtained_Alcove,_with_.jpg",
+      "223795_Piece.jpg",
+      "269123_Excursions_Daguerriennes._Vues_et_monuments_les_pl.jpg",
+      "312844_Miniature_Dress.jpg",
+      "40018_Ink_Tablet_with_Thousand-Year_Fungus_Motif.jpg",
+      "256128_Terracotta_antefix_with_lion's_head.jpg",
+      "224753_Embroidery_sample_for_a_manΓÇÖs_suit.jpg",
+      "_Mou.jpg",
+      "394826_Seven_Designs_for_Decorated_Plates.jpg",
+      "204249_Censer.jpg",
+      "59603_Netsuke_of_Mask_of_Old_Man's_Face.jpg",
+      "33112_Pendant.jpg",
+      "45311_Sumidagawa_Hashiba_Watashi_Zu_(Yanagiya).jpg",
+      "_Frontispiece,_Vol.1.jpg",
+      "285710_Otoe-Missouria_Delegation.jpg",
+      "35140_Sword_Guard_(Tsuba).jpg",
+      "288209_Grande_Pagode_-_Tour_Nord_du_2e_Etage.jpg",
+      "338443_View_of_the_Bargello_Courtyard_in_Florence.jpg",
+      "191020_Tile.jpg",
+      "200411_Snuffbox_with_portrait_of_a_woman.jpg",
+      "384632_Elin.jpg",
+      "187808_Goblet_and_saucer.jpg",
+      "396456_Judith_her_sword_raised_in_her_right_hand,_placing.jpg",
+      "312247_Miniature_Dress.jpg",
+      "207377_Corner_cabinet_(encoignure)_(one_of_a_pair).jpg",
+      "5025_Medal_Commemorating_the_Treaty_of_Commerce_between.jpg",
+      "379006_Design_for_Pony_Phaeton,_no._3941.jpg",
+      "389579_Drawing_for_a_Palace_Decoration.jpg",
+      "207196_Satirical_group.jpg",
+      "59372_Ashinaga_(Long_Legs)_and_a_Daoist_Sage.jpg",
+      "266500_Rice_Fields.jpg",
+      "239500_Jardinie╠Çre_with_chickens.jpg",
+      "169670_Cuffs.jpg",
+      "11121_Flower_Garden_and_Bungalow,_Bermuda.jpg",
+      "16897_Anotomaical_Description_of_the_Hand_and_the_Wrist.jpg",
+      "58899_Case_(Inro╠ä)_with_Design_of_Samurai_Helmet_and_Face.jpg",
+      "59141_Tiger.jpg",
+      "319800_Bottle_with_female_figure.jpg",
+      "243407_Earring-hook_type_with_disc.jpg",
+      "187788_Wall_panel_tiles.jpg",
+      "336108_A_View_of_the_Obelisk_and_Saint_John_in_Lateran_(a.jpg",
+      "5727_Pitcher.jpg",
+      "58773_Case_(Inro╠ä)_with_Design_of_Bird_on_Standing_on_Roc.jpg",
+      "325623_Square_jar.jpg",
+      "38773_Head_of_a_Buddha_(Study_Collection).jpg",
+      "227265_Piece.jpg",
+      "224708_Sample.jpg",
+      "339397_Zephyr_and_Flora.jpg",
+      "288406_S._Pietro_in_Vaticano.jpg",
+      "53295_Bracelet.jpg",
+      "381101_Phenix_Bank,_New_York.jpg",
+      "382850_A_Sea_Nymph_and_a_Triton_on_a_Dolphin.jpg",
+      "336593_Kneeling_Figure_of_Saint_Catherine_of_Alexandria.jpg",
+      "243619_Ring_with_scarab.jpg",
+      "223288_Piece.jpg",
+      "389066_The_Scotch_Butchery,_Boston,_1775.jpg",
+      "340159_A_Bishop_in_Ecstasy.jpg",
+      "28988_Set_of_Sword-Hilt_Washers_and_Pommels_(Fuchigashir.jpg",
+      "30005_Sword_Guard_(Tsuba).jpg",
+      "63230_Page_from_the_Mustard_Seed_Garden_Manual_of_Painti.jpg",
+      "61220_Upright_bell_(nao).jpg",
+      "224405_Piece.jpg",
+      "294724_[Grand_Army_Review,_Washington,_D.C.].jpg",
+      "33780_Pair_of_Wheellock_Pistols.jpg",
+      "350519_Le_Cannameliste_Franc╠ºais,_Ou_Nouvelle_Instruction_.jpg",
+      "8206_Tankard.jpg",
+      "395538_A_Winter's_Walk.jpg",
+      "189640_Pair_of_terminal_statuettes.jpg",
+      "115817_Shoes.jpg",
+      "217616_Crochet_Work.jpg",
+      "342536_Martha_leading_Mary_Magdalene_up_a_flight_of_stair.jpg",
+      "336750_Ornament_Panel_with_Terms_and_Spiral_Bases.jpg",
+      "37085_Sumidagawa_Mimeguri_Hana_Zakari_no_Kei.jpg",
+      "227827_Piece.jpg",
+      "345722_The_triumph_of_a_Roman_Emperor;_a_young_naked_hero.jpg",
+      "219777_Embroidered_picture.jpg",
+      "227767_Pillowcase.jpg",
+      "334294_Le_Chariot_de_Terre_Cuite.jpg",
+      "197726_Milo_of_Crotona.jpg",
+      "221744_Border.jpg",
+      "78618_Ko╠ärin_Picture_Album_(Ko╠ärin_gafu)_σàëτÉ│τö╗Φ¡£.jpg",
+      "392135_Allow_Me_to_Examine_the_Young_Lady_(from_The_Mi.jpg",
+      "335025_St._Paul.jpg",
+      "366108_St._John.jpg",
+      "368314_Susanna_and_the_Elders_(recto);_Architectural_desi.jpg",
+      "70766_Figure_of_a_Noble_Lady.jpg"
+    ];
+
+    const container = document.getElementById("container");
+
+    function getRandomImages(n) {
+      const shuffled = imageList
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+      return shuffled.slice(0, n);
+    }
+
+    function generateExquisite() {
+      container.innerHTML = "";
+
+      const chosenImages = getRandomImages(4);
+
+      chosenImages.forEach((imgName, index) => {
+        const slice = document.createElement("div");
+        slice.classList.add("slice");
+
+        const img = document.createElement("img");
+        img.src = "images/" + imgName;
+        img.alt = "Image " + (index + 1);
+
+        slice.appendChild(img);
+        container.appendChild(slice);
+      });
+    }
+
+    window.onload = generateExquisite;
+  </script>
+</body>
+</html>
